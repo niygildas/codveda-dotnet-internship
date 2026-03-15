@@ -1,37 +1,47 @@
 # Codveda Technologies — .NET Development Internship
-
-**Intern:** Gildas Pacifique Niyonkuru
-**ID:** CV/A1/61579
-**Role:** .NET Development Intern
+**Intern:** Gildas Pacifique Niyonkuru | **ID:** CV/A1/61579
 
 ---
 
-## Level 3 — Advanced Tasks
+## 📁 Project Structure
 
-### Task 1: Microservices Architecture with .NET
-- API Gateway using YARP
-- Order Service with RabbitMQ event publishing
-- Notification Service consuming RabbitMQ events
-- Docker Compose for full stack orchestration
+```
+codveda-internship/
+├── level1/
+│   ├── task2_oop/          C# OOP — HR Employee System
+│   └── task3_exceptions/   Exception Handling — Bank System
+├── level2/
+│   ├── task1_console/      Console Task Manager App
+│   ├── task2_aspnet/       ASP.NET Core Blog Platform (MVC + API)
+│   └── task3_auth/         JWT Authentication & Authorization
+├── level3/
+│   ├── task1_microservices/ Microservices + RabbitMQ + Docker
+│   ├── task2_async/         Async Programming & Multithreading
+│   └── task3_azure/         Azure Cloud Integration
+└── kubernetes/
+    ├── src/                 K8s-ready .NET 8 API
+    ├── manifests/           Deployment, Service, HPA, ConfigMap, Secret
+    └── KUBERNETES_STUDY_GUIDE.sh
+```
 
-**Run:**
+## 🚀 Quick Start
+
+### Level 3 Task 1 — Microservices
 ```bash
 cd level3/task1_microservices
 docker compose up --build
+# Test: curl -X POST http://localhost:5000/api/orders -H "Content-Type: application/json" -d '{"productId":"P001","quantity":2}'
 ```
 
-**Test:**
+### Kubernetes
 ```bash
-curl -X POST http://localhost:5000/api/orders \
-     -H "Content-Type: application/json" \
-     -d '{"productId":"PROD-001","quantity":3}'
+minikube start
+kubectl apply -f kubernetes/manifests/
+kubectl get pods -n codveda
 ```
 
-### Task 3: Cloud Integration with Azure
-- Azure Blob Storage service
-- Azure Functions (HTTP + Timer triggers)
-- ASP.NET Core with Azure DI
-- Azure DevOps CI/CD pipeline (Blue-Green deployment)
+## 🛠 Tech Stack
+.NET 8 | ASP.NET Core | EF Core | Docker | Kubernetes | RabbitMQ | Azure | JWT | CI/CD
 
 ---
 #CodvedaJourney #CodvedaExperience #FutureWithCodveda

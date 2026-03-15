@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: codveda
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-api-service
+  namespace: codveda
+spec:
+  selector:
+    app: products-api
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: codveda
+data:
+  db_host: "postgres-service"
+  db_port: "5432"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secrets
+  namespace: codveda
+type: Opaque
+data:
+  db_password: TXlTZWN1cmVQYXNzd29yZDEyMyE=
+  jwt_secret: Q29kdmVkYUludGVybnNoaXAyMDI2U3VwZXJTZWNyZXRLZXkhQCM=
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: products-api-hpa
+  namespace: codveda
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: products-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
